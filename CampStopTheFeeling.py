@@ -1,5 +1,5 @@
 """Pull campsite availability data."""
-from datetime import date
+from datetime import date, datetime
 
 import requests
 
@@ -50,7 +50,6 @@ def request_availability_data(facility_id, year, month):
     return response.json()['campsites']
 
 
-
 def get_campground_availability(facility_id, date_range):
     """Return availability data for a single campground for the given date range.
 
@@ -78,6 +77,18 @@ def get_campground_availability(facility_id, date_range):
     return campsite_availability_info
 
 
+def convert_dates(campsite_availability_info):
+
+    pass
+    '''
+    d = '2020-11-27T00:00:00Z'
+    format = '%Y-%m-%dT%H:%M:%SZ'
+
+    date_object = datetime.strptime(d, format).date()
+    date_object2 = date(2020,11,27)
+
+    print(f'formatted date: {date_object}')'''
+
 def main():
     """Loop through each campground/facility in CONFIG and check availability.
 
@@ -91,6 +102,13 @@ def main():
         for date_range in campground_info['date_ranges']:
 
             campsite_availability_info = get_campground_availability(campground_info['facility_id'], date_range)
+
+            convert_dates(campsite_availability_info)
+
+            '''to-do: 
+                - write a function that returns campsite ID & info
+                -               
+            '''
 
             print('\n--- Availability Information ---')
             print(f'{name} - Check in: {date_range.check_in}  Check out: {date_range.check_out}')
@@ -106,8 +124,8 @@ def main():
 
                 avail = site_info['availabilities']
 
-                for d in avail:
-                    if avail[d] == 'Available':
+                for d, status in avail.items():
+                    if status == 'Available':
                         print(f'{d}')
                
            #print(f'Unfiltered campsite availability:\n{campsite_availability_info}')
