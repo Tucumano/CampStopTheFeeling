@@ -77,7 +77,7 @@ def get_campground_availability(facility_id, date_range):
 
 
 def convert_dates(campsite_availability_info):
-    pass
+    pass  # pylint: disable=unnecessary-pass
     '''
     d = '2020-11-27T00:00:00Z'
     format = '%Y-%m-%dT%H:%M:%SZ'
@@ -104,9 +104,7 @@ def main():
 
             convert_dates(campsite_availability_info)
 
-            '''to-do:
-                - write a function that returns campsite ID & info
-            '''
+            # TODO: write a function that returns campsite ID & info  # pylint: disable=fixme
 
             print('\n--- Availability Information ---')
             print(f'{name} - Check in: {date_range.check_in}  Check out: {date_range.check_out}')
