@@ -97,7 +97,20 @@ def main():
 
             # We still need to filter down the returned campsite availability info to the specific dates requested.
             # Right now we have it for the entire month(s) and it's not filtered down to only available days.
-            print(f'Unfiltered campsite availability:\n{campsite_availability_info}')
+            
+            # MDG's best attempt to pull open availability
+            print('\n--- Open Availability ---')
+            for site, site_info in campsite_availability_info.items():
+                
+                print(f'Site:{site} Available on:')
+
+                avail = site_info['availabilities']
+
+                for d in avail:
+                    if avail[d] == 'Available':
+                        print(f'{d}')
+               
+           #print(f'Unfiltered campsite availability:\n{campsite_availability_info}')
 
 
 if __name__ == '__main__':
