@@ -6,7 +6,6 @@ import requests
 import constants
 from helpers import DateRange
 
-
 MIKES_CHANNEL_ISLANDS_DATES = [
     DateRange(check_in=date(2020, 11, 4), check_out=date(2020, 11, 7)),
     DateRange(check_in=date(2020, 12, 4), check_out=date(2020, 12, 6))
@@ -78,7 +77,6 @@ def get_campground_availability(facility_id, date_range):
 
 
 def convert_dates(campsite_availability_info):
-
     pass
     '''
     d = '2020-11-27T00:00:00Z'
@@ -88,6 +86,7 @@ def convert_dates(campsite_availability_info):
     date_object2 = date(2020,11,27)
 
     print(f'formatted date: {date_object}')'''
+
 
 def main():
     """Loop through each campground/facility in CONFIG and check availability.
@@ -105,9 +104,8 @@ def main():
 
             convert_dates(campsite_availability_info)
 
-            '''to-do: 
+            '''to-do:
                 - write a function that returns campsite ID & info
-                -               
             '''
 
             print('\n--- Availability Information ---')
@@ -115,11 +113,11 @@ def main():
 
             # We still need to filter down the returned campsite availability info to the specific dates requested.
             # Right now we have it for the entire month(s) and it's not filtered down to only available days.
-            
+
             # MDG's best attempt to pull open availability
             print('\n--- Open Availability ---')
             for site, site_info in campsite_availability_info.items():
-                
+
                 print(f'Site:{site} Available on:')
 
                 avail = site_info['availabilities']
@@ -127,8 +125,8 @@ def main():
                 for d, status in avail.items():
                     if status == 'Available':
                         print(f'{d}')
-               
-           #print(f'Unfiltered campsite availability:\n{campsite_availability_info}')
+
+        # print(f'Unfiltered campsite availability:\n{campsite_availability_info}')
 
 
 if __name__ == '__main__':
