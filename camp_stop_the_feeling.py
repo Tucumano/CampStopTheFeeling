@@ -77,6 +77,12 @@ def get_campground_availability(facility_id, date_range):
 
 
 def convert_dates(campsite_availability_info):
+    """Convert/overwrite string dates from API call to date format.
+
+        Args:
+            campsite_availability_info (dict): The campground/campsite info returned from get_campground_availability()
+
+        """
     date_format = '%Y-%m-%dT%H:%M:%SZ'
 
     for campsite, campsite_info in campsite_availability_info.items():
