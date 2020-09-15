@@ -77,15 +77,17 @@ def get_campground_availability(facility_id, date_range):
 
 
 def convert_dates(campsite_availability_info):
-    pass  # pylint: disable=unnecessary-pass
-    '''
-    d = '2020-11-27T00:00:00Z'
-    format = '%Y-%m-%dT%H:%M:%SZ'
+    date_format = '%Y-%m-%dT%H:%M:%SZ'
 
-    date_object = datetime.strptime(d, format).date()
-    date_object2 = date(2020,11,27)
+    for campsite, campsite_info in campsite_availability_info.items():
 
-    print(f'formatted date: {date_object}')'''
+        new_dict = {}
+        for date_avail in campsite_info["availabilities"]:
+
+            formatted_date = datetime.strptime(date_avail, date_format).date()
+            new_dict[formatted_date] = campsite_info["availabilities"][date_avail]
+
+        campsite_info["availabilities"] = new_dict
 
 
 def main():
@@ -103,9 +105,11 @@ def main():
             campsite_availability_info = get_campground_availability(campground_info['facility_id'], date_range)
 
             convert_dates(campsite_availability_info)
+            print(campsite_availability_info)
 
-            # TODO: write a function that returns campsite ID & info  # pylint: disable=fixme
+            # TODO: write a function that returns campsite ID & info for available during dates ranges # pylint: disable=fixme
 
+            '''
             print('\n--- Availability Information ---')
             print(f'{name} - Check in: {date_range.check_in}  Check out: {date_range.check_out}')
 
@@ -125,6 +129,7 @@ def main():
                         print(f'{d}')
 
         # print(f'Unfiltered campsite availability:\n{campsite_availability_info}')
+        '''
 
 
 if __name__ == '__main__':
